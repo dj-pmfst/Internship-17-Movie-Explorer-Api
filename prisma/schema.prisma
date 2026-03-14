@@ -8,21 +8,25 @@ datasource db {
   provider = "postgresql"
 }
 
-model Article {
+model Movie {
   id          Int      @id @default(autoincrement())
   title       String   @unique
-  description String?
-  body        String
-  published   Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  authorId    Int?
-  author      User?    @relation(fields: [authorId], references: [id])
+  year        Int
+  rating      Float
+  description String
+  poster      String
+  genres      Genre[] @relation("MovieGenres")
+  favourites  Favourite[]
 }
 
-model User {
-  id       Int       @id @default(autoincrement())
-  name     String
-  email    String    @unique
-  articles Article[]
+model Genre {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  movies Movie[] @relation("MovieGenres")
+}
+
+model Favorite {
+  id      Int   @id @default(autoincrement())
+  movie   Movie @relation(fields: [movieId], references: [id])
+  movieId Int   @unique
 }
