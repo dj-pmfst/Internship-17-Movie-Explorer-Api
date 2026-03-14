@@ -26,7 +26,7 @@ export class MoviesService {
   }
 
   create(dto: CreateMovieDto) {
-    return this.prisma.movie.create({ data: dto })
+    return this.prisma.movie.create({ data: CreateMovieDto })
   }
 
   update(id: number, dto: UpdateMovieDto) {
