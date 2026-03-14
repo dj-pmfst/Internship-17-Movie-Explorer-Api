@@ -25,6 +25,11 @@ async function main() {
   )
 
   for (const movie of movies) {
+    const genreId = genreMap[movie.genre.toLowerCase()]
+    if (!genreId) {
+        console.warn(`Žanr nije pronaden za film: ${movie.title}`)
+        continue
+    }
     await prisma.movie.create({
       data: {
         title: movie.title,
