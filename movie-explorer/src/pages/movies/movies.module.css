@@ -1,0 +1,120 @@
+img{
+    max-width: 200px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(27, 26, 26, 0.333);
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.header img{
+    max-width: 30px;
+    height: auto;
+    filter: invert(100%);
+    padding-left: 5px;
+}
+
+.header span{
+    font-family: "Pacifico", cursive;
+    font-weight: 100;
+    font-size: 25px;
+}
+
+.main {
+    padding-right: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.searches{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+}
+
+.searches input, .searches select{
+    border-radius: 8px;
+    border: 1px solid rgb(44, 43, 43);
+    background-color: rgba(199, 220, 239, 0.66);
+    font-size: 16px;
+    padding: 5px;
+}
+
+.searches input::placeholder{
+    color: rgba(0, 0, 0, 0.57);
+}
+
+.movies {
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+    padding: 1rem;
+    background-color: rgb(47, 46, 46);
+    border-radius: 10px;
+}
+
+.movies::-webkit-scrollbar {
+    display: none;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+h3 {
+    margin: 0;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-family: Helvetica, sans-serif;
+}
+
+p {
+    margin-top: 5px;
+    margin-left: 6px;
+    font-size: 11px;
+}
+
+.favLink {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: inherit;
+    padding: 10px;
+}
+
+.star {
+    max-width: 20px;
+    height: auto;
+    filter: none !important;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.favLink:hover .star {
+    opacity: 1;
+}
+
+.favLink:hover{
+    background-color: rgb(47, 46, 46);
+    border-radius: 10px;
+    font-family: "Pacifico", cursive;
+}
