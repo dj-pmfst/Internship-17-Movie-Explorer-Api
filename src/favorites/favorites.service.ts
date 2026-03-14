@@ -3,7 +3,7 @@ import { CreateFavouriteDto } from './dto/create-favourite.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
-export class FavoritesService {
+export class FavoriteService {
     constructor(private prisma: PrismaService) {}
 
     create(dto: CreateFavouriteDto) {
