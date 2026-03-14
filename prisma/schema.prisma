@@ -25,7 +25,7 @@ model Genre {
   movies Movie[] @relation("MovieGenres")
 }
 
-model Favorite {
+model Favourite {
   id      Int   @id @default(autoincrement())
   movie   Movie @relation(fields: [movieId], references: [id])
   movieId Int   @unique
