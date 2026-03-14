@@ -3,7 +3,7 @@ import { CreateGenreDto } from './dto/create-genre.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
-export class GenresService {
+export class GenreService {
     constructor(private prisma: PrismaService) {}
 
     create(dto: CreateGenreDto) {
