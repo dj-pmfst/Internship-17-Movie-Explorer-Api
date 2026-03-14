@@ -11,29 +11,49 @@ export class MoviesService {
     return this.prisma.movie.findMany({
       where: {
         title: search ? { contains: search, mode: 'insensitive' } : undefined,
-        genres: genre ? { some: { name: genre } } : undefined
+        genres: genre ? { some: { name: genre } } : undefined,
       },
       orderBy: sort ? { [sort]: 'asc' } : undefined,
-      include: { genres: true }
-    })
+      include: { genres: true },
+    });
   }
 
   findOne(id: number) {
-    return this.prisma.movie.findUnique({ 
+    return this.prisma.movie.findUnique({
       where: { id },
-      include: { genres: true }
-    })
+      include: { genres: true },
+    });
   }
 
   create(dto: CreateMovieDto) {
-    return this.prisma.movie.create({ data: CreateMovieDto })
+    const { genres, ...rest } = dto;
+    return this.prisma.movie.create({
+      data: {
+        ...rest,
+        description: rest.description ?? '',   
+        genres: genres
+          ? { connect: genres.map((name) => ({ name })) }
+          : undefined,
+      },
+      include: { genres: true },
+    });
   }
 
   update(id: number, dto: UpdateMovieDto) {
-    return this.prisma.movie.update({ where: { id }, data: dto })
+    const { genres, ...rest } = dto;
+    return this.prisma.movie.update({
+      where: { id },
+      data: {
+        ...rest,
+        genres: genres
+          ? { set: genres.map((name) => ({ name })) }
+          : undefined,
+      },
+      include: { genres: true },
+    });
   }
 
   remove(id: number) {
-    return this.prisma.movie.delete({ where: { id } })
+    return this.prisma.movie.delete({ where: { id } });
   }
 }
