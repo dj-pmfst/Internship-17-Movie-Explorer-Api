@@ -7,10 +7,17 @@ import { join } from 'path'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
-  app.useStaticAssets(join(__dirname, '..', '..', 'public'))
+  app.useStaticAssets(join(__dirname, '..', '..', 'public'), {
+    setHeaders: (res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
+        res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin')
+    }
+  })
 
   app.enableCors({
-    origin: 'http://localhost:5173'
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Accept'],
   })
 
   const config = new DocumentBuilder()
