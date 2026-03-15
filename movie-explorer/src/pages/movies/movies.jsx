@@ -8,6 +8,7 @@ import Loading from "../../components/Loading/loader"
 
 export default function Movies() {
     const [searchParams] = useSearchParams()          
+    const [inputValue, setInputValue] = useState(searchParams.get("search") || "")
     const [search, setSearch] = useState(searchParams.get("search") || "")
     const [sortBy, setSortBy] = useState("title")
     const [genre, setGenre] = useState("All")
@@ -31,9 +32,10 @@ export default function Movies() {
     }, [loading])
 
     const handleSearch = (e) => {
+        setInputValue(e.target.value)  
         clearTimeout(debounceRef.current)
         debounceRef.current = setTimeout(() => {
-            setSearch(e.target.value)
+            setSearch(e.target.value)  
         }, 300)
     }
 
@@ -57,6 +59,7 @@ export default function Movies() {
                     <input
                         ref={searchRef}
                         type="text"
+                        value={inputValue}  
                         placeholder="Search for a movie..."
                         className={styles.searchBar}
                         onChange={handleSearch}
