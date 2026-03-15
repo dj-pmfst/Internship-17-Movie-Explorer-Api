@@ -32,24 +32,24 @@ export default function Favourites() {
 
     if (loading) return <Loading />
 
-    if (favourites.length === 0) 
-        return <p>No favourites added</p>
-
-        return (
-            <div className={styles.container}>
-                <header className={styles.header}>
-                    <span>Favourites <img className={styles.star} src="/src/assets/icons/star.png" /></span>
-                    <button className={styles.backButton} onClick={() => navigate(-1)}><img src='/src/assets/icons/left-arrow.svg'/></button>
-                </header>
-                <main className={styles.main}>
-                    <div className={styles.favourites}>
-                        <div className={styles.grid}>
-                        {favourites.map(fav => (
+    return (
+        <div className={styles.container}>
+            <header className={styles.header}>
+                <span>Favourites <img className={styles.star} src="/src/assets/icons/star.png" /></span>
+                <button className={styles.backButton} onClick={() => navigate(-1)}><img src='/src/assets/icons/left-arrow.svg'/></button>
+            </header>
+            <main className={styles.main}>
+                <div className={styles.favourites}>
+                    {favourites.length === 0 
+                        ? <p className={styles.empty}>No favourites added</p>
+                        : <div className={styles.grid}>
+                            {favourites.map(fav => (
                                 <MovieCard key={fav.id} movie={fav.movie} onRemove={() => removeFavourite(fav.id)} />
                             ))}
                         </div>
-                    </div>
-                </main>
-            </div>
-        )
+                    }
+                </div>
+            </main>
+        </div>
+    )
 }
