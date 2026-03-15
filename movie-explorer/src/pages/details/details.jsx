@@ -1,7 +1,7 @@
 import styles from './details.module.css'
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { useDominantColor } from "../../hooks/useDominantColor"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function MovieDetail() {
     const { id } = useParams()

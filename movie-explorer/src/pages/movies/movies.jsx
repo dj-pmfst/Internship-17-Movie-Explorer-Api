@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useState, useMemo, useRef, useEffect } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useFetchMovies } from "../../hooks/useFetchMovies"
 import MovieCard from "../../components/MovieCard/MovieCard"
 import styles from './movies.module.css'
@@ -7,11 +7,11 @@ import { useSearchParams } from "react-router-dom"
 import Loading from "../../components/Loading/loader"
 
 export default function Movies() {
-    const { data, loading, error } = useFetchMovies(search, sortBy, genre)
+    const [searchParams] = useSearchParams()          
     const [search, setSearch] = useState(searchParams.get("search") || "")
-    const [searchParams] = useSearchParams()
     const [sortBy, setSortBy] = useState("title")
     const [genre, setGenre] = useState("All")
+    const { data, loading, error } = useFetchMovies(search, sortBy, genre) 
     const searchRef = useRef(null)
     const debounceRef = useRef(null)
     const [genres, setGenres] = useState([])
@@ -36,29 +36,6 @@ export default function Movies() {
             setSearch(e.target.value)
         }, 300)
     }
-
-    const filteredMovies = useMemo(() => {
-        let result = [...data]
-
-        if (search) {
-            result = result.filter(movie =>
-                movie.title.toLowerCase().includes(search.toLowerCase())
-            )
-        }
-
-        if (genre !== "All") {
-            result = result.filter(movie => movie.genre === genre)
-        }
-
-        result.sort((a, b) => {
-            if (sortBy === "title") return a.title.localeCompare(b.title)
-            if (sortBy === "year") return b.year - a.year
-            if (sortBy === "rating") return b.rating - a.rating
-            return 0
-        })
-
-        return result
-    }, [data, search, genre, sortBy])
 
     if (loading) return <Loading />
     if (error) return <p>{error}</p>
