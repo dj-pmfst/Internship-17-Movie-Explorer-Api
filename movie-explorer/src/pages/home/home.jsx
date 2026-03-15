@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom"
-import { useState, useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 import { movies } from "../../data/movies"
 import styles from './home.module.css'
 
-export default function home() {
+export default function Home() {
     const navigate = useNavigate()
     const ribbonRef = useRef(null)
 

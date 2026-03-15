@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useState, useMemo, useRef, useEffect } from "react"
 import { useFetchMovies } from "../../hooks/useFetchMovies"
 import MovieCard from "../../components/MovieCard/MovieCard"
@@ -7,7 +7,6 @@ import { useSearchParams } from "react-router-dom"
 import Loading from "../../components/Loading/loader"
 
 export default function Movies() {
-    const navigate = useNavigate()
     const { data, loading, error } = useFetchMovies()
     const [searchParams] = useSearchParams()
     const [search, setSearch] = useState(searchParams.get("search") || "")
