@@ -16,6 +16,16 @@ export default function Movies() {
     const searchRef = useRef(null)
     const debounceRef = useRef(null)
     const [genres, setGenres] = useState([])
+    const [favorites, setFavorites] = useState([])
+
+    useEffect(() => {
+        fetch("http://localhost:3000/favorites")
+            .then(res => res.json())
+            .then(data => { 
+                console.log('favorites:', data)
+                if (Array.isArray(data)) setFavorites(data) 
+            })
+    }, [])
 
     useEffect(() => {
         fetch("http://localhost:3000/genres")
@@ -84,7 +94,12 @@ export default function Movies() {
                     ? <p>No movies found for this query.</p>
                     : <div className={styles.grid}>
                         {data.map(movie => (
-                            <MovieCard key={movie.id} movie={movie} />
+                            <MovieCard 
+                            key={movie.id} 
+                            movie={movie}
+                            isFavourite={
+                                favorites.some(f => f.movieId === movie.id)}
+                            />
                         ))}
                     </div>
                 }                  

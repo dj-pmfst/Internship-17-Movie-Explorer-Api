@@ -24,3 +24,7 @@
 .removeButton:hover {
     background-color: darkred;
 }
+
+.favourite {
+    background-color: rgba(255, 215, 0, 0.1);
+}
