@@ -1,14 +1,19 @@
 import styles from './favourites.module.css'
-import { useLocalStorage } from "../../hooks/useLocalStorage"
 import MovieCard from "../../components/MovieCard/MovieCard"
 import { useNavigate } from "react-router-dom"
 import Loading from "../../components/Loading/loader"
 import { useState, useEffect } from "react"
 
 export default function Favourites() {
-    const [favourites, setFavourites] = useLocalStorage("favourites", [])
+    const [favourites, setFavourites] = useState([ ])
     const navigate = useNavigate()
     const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        fetch("http://localhost:3000/favorites")
+            .then(res => res.json())
+            .then(data => setFavourites(data))
+    }, [])
 
     useEffect(() => {                          
         const timeout = setTimeout(() => {
@@ -17,8 +22,9 @@ export default function Favourites() {
         return () => clearTimeout(timeout)
     }, [])
 
-    const removeFavourite = (id) => {
-        setFavourites(favourites.filter(movie => movie.id !== id))
+    const removeFavourite = async (id) => {
+        await fetch(`http://localhost:3000/favorites/${id}`, { method: "DELETE" })
+        setFavourites(favourites.filter(f=>f.id !== id))
     }
 
     if (loading) return <Loading />
@@ -35,8 +41,8 @@ export default function Favourites() {
                 <main className={styles.main}>
                     <div className={styles.favourites}>
                         <div className={styles.grid}>
-                            {favourites.map(movie => (
-                                <MovieCard key={movie.id} movie={movie} onRemove={removeFavourite} />
+                        {favourites.map(fav => (
+                                <MovieCard key={fav.id} movie={fav.movie} onRemove={() => removeFavourite(fav.id)} />
                             ))}
                         </div>
                     </div>
