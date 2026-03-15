@@ -15,6 +15,12 @@ export default function Movies() {
     const [genre, setGenre] = useState("All")
     const searchRef = useRef(null)
     const debounceRef = useRef(null)
+
+    useEffect(() => {
+        fetch("http://localhost:3000/genres")
+            .then(res => res.json())
+            .then(data => setGenre(data))
+    }, [])
     
     useEffect(() => {
         if (searchRef.current) {
@@ -84,12 +90,11 @@ export default function Movies() {
                     </select>
 
                     <select onChange={(e) => setGenre(e.target.value)} value={genre}>
-                        <option value="All">All Genres</option>
-                        <option value="Action">Action</option>
-                        <option value="Drama">Drama</option>
-                        <option value="Sci-fi">Sci-fi</option>
-                        <option value="Fantasy">Fantasy</option>
-                    </select>                    
+                        <option value="">All Genres</option>
+                        {genres.map(g => (
+                            <option key={g.id} value={g.name}>{g.name}</option>
+                        ))}
+                    </select>                  
                 </div>
                 
                 <div className={styles.movies}>
