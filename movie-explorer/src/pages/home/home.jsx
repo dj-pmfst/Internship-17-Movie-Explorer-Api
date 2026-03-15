@@ -1,11 +1,17 @@
 import { Link, useNavigate } from "react-router-dom"
-import { useEffect, useRef } from "react"
-import { movies } from "../../data/movies"
+import { useEffect, useRef, useState } from "react"
 import styles from './home.module.css'
 
 export default function Home() {
     const navigate = useNavigate()
     const ribbonRef = useRef(null)
+    const [movies, setMovies] = useState([])
+
+    useEffect(() => {
+        fetch("http://localhost:3000/movies")
+            .then(res => res.json())
+            .then(data => setMovies(data))
+    }, [])
 
     useEffect(() => {
         const ribbon = ribbonRef.current
@@ -14,7 +20,7 @@ export default function Home() {
     
         const scroll = () => {
             if (ribbon) {
-                position += 0.35 
+                position += 0.35
                 ribbon.scrollLeft = position
                 if (position >= ribbon.scrollWidth / 2) {
                     position = 0

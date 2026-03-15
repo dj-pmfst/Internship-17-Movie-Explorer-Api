@@ -7,18 +7,21 @@ import { useSearchParams } from "react-router-dom"
 import Loading from "../../components/Loading/loader"
 
 export default function Movies() {
-    const { data, loading, error } = useFetchMovies()
-    const [searchParams] = useSearchParams()
+    const { data, loading, error } = useFetchMovies(search, sortBy, genre)
     const [search, setSearch] = useState(searchParams.get("search") || "")
+    const [searchParams] = useSearchParams()
     const [sortBy, setSortBy] = useState("title")
     const [genre, setGenre] = useState("All")
     const searchRef = useRef(null)
     const debounceRef = useRef(null)
+    const [genres, setGenres] = useState([])
 
     useEffect(() => {
         fetch("http://localhost:3000/genres")
             .then(res => res.json())
-            .then(data => setGenre(data))
+            .then(data => {
+                if (Array.isArray(data)) setGenres(data)
+            })
     }, [])
     
     useEffect(() => {
@@ -93,18 +96,18 @@ export default function Movies() {
                         {genres.map(g => (
                             <option key={g.id} value={g.name}>{g.name}</option>
                         ))}
-                    </select>                  
+                    </select>                
                 </div>
                 
                 <div className={styles.movies}>
-                    {filteredMovies.length === 0
-                        ? <p>No movies found for this query.</p>
-                        : <div className={styles.grid}>
-                            {filteredMovies.map(movie => (
-                                <MovieCard key={movie.id} movie={movie} />
-                            ))}
-                        </div>
-                    }                    
+                {data.length === 0
+                    ? <p>No movies found for this query.</p>
+                    : <div className={styles.grid}>
+                        {data.map(movie => (
+                            <MovieCard key={movie.id} movie={movie} />
+                        ))}
+                    </div>
+                }                  
                 </div>
             </main>
         </div>

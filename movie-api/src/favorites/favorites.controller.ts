@@ -12,7 +12,7 @@ import {
   import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Favorite')
-@Controller('favorite')
+@Controller('favorites')
 export class FavoriteController {
   constructor(private favoriteService: FavoriteService) {}
 

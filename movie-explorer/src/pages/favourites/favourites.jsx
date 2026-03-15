@@ -12,7 +12,10 @@ export default function Favourites() {
     useEffect(() => {
         fetch("http://localhost:3000/favorites")
             .then(res => res.json())
-            .then(data => setFavourites(data))
+            .then(data => {
+                if (Array.isArray(data)) setFavourites(data)
+            })
+            .catch(err => console.error(err))
     }, [])
 
     useEffect(() => {                          
