@@ -28,11 +28,10 @@ export class UserService {
         const hashedPassword = await hash(password, 10);
 
         const user = await this.prisma.user.create({
-        data: {
-            email,
-            password: hashedPassword,
-            username: email,
-        },
+            data: {
+                email,
+                password: hashedPassword,
+            },
         });
 
         const payload = {
