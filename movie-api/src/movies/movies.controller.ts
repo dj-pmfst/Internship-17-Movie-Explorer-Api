@@ -7,12 +7,14 @@ import {
     Param,
     Delete,
     ParseIntPipe,
-    Query
+    Query,
+    UseGuards
   } from '@nestjs/common';
   import { MoviesService } from './movies.service';
   import { CreateMovieDto } from './dto/create-movie.dto';
   import { UpdateMovieDto } from './dto/update-movie.dto';
   import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { AdminAuthGuard } from 'src/user/admin-auth.guard';
 
 @ApiTags('movies')
 @Controller('movies')
@@ -35,18 +37,21 @@ export class MoviesController {
     return this.moviesService.findOne(id)
   }
 
+  @UseGuards(AdminAuthGuard)
   @Post()
   @ApiCreatedResponse({ description: 'Kreiran novi film' })
   create(@Body() dto: CreateMovieDto) {
     return this.moviesService.create(dto)
   }
 
+  @UseGuards(AdminAuthGuard)
   @Patch(':id')
   @ApiOkResponse({ description: 'Ažuriran film' })
   update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateMovieDto) {
     return this.moviesService.update(id, dto)
   }
 
+  @UseGuards(AdminAuthGuard)
   @Delete(':id')
   @ApiOkResponse({ description: 'Obrisan film' })
   remove(@Param('id', ParseIntPipe) id: number) {

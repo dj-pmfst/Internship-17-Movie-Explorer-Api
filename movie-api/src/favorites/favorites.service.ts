@@ -6,22 +6,29 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class FavoriteService {
     constructor(private prisma: PrismaService) {}
 
-    create(dto: CreateFavouriteDto) {
+    create(dto: CreateFavouriteDto, userId: number) {
         return this.prisma.favourite.create({
-            data: { movieId: dto.movieId },
+            data: { 
+                movieId: dto.movieId,
+                userId 
+            },
             include: { movie: true }  
         })
     }
 
-    findAll() {
+    findAll(userId: number) {
         return this.prisma.favourite.findMany({
+            where: {userId},
             include: { movie: true }  
         })
     }
 
-    remove(id: number) {
+    remove(id: number, userId: number) {
         return this.prisma.favourite.delete({
-            where: { id }
+            where: { 
+                id,
+                userId 
+            }
         })
     }
 }
