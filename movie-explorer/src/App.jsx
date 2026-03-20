@@ -6,6 +6,7 @@ import MovieDetail from "./pages/details/details"
 import Favourites from "./pages/favourites/favourites"
 import NotFound from "./pages/error/error"
 import Auth from "./pages/auth/auth"
+import Manager from "./pages/manager/manager"
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Auth />}/>
         <Route path="/home" element={<Home />} />
+        <Route path="/manager" element={<Manager/>} />
         <Route path="/movies" element={<Movies />}></Route>
         <Route path="/movies/:id" element={<MovieDetail />} />
         <Route path="/favourites" element={<Favourites />}></Route>

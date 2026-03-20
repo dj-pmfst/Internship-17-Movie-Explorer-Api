@@ -5,7 +5,7 @@ body {
   font-family: "Playwrite DE Grund", cursive;
   font-optical-sizing: auto;
   color: azure;
-  overflow: hidden;
+  overflow: auto;
 }
 
 a {
