@@ -10,7 +10,9 @@ export default function Favourites() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch("http://localhost:3000/favorites")
+        fetch("http://localhost:3000/favorites", {
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+        })
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) setFavourites(data)
@@ -26,8 +28,13 @@ export default function Favourites() {
     }, [])
 
     const removeFavourite = async (id) => {
-        await fetch(`http://localhost:3000/favorites/${id}`, { method: "DELETE" })
-        setFavourites(favourites.filter(f=>f.id !== id))
+        await fetch(`http://localhost:3000/favorites/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+        setFavourites(favourites.filter(f => f.id !== id))
     }
 
     if (loading) return <Loading />

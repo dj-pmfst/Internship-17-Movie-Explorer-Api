@@ -15,25 +15,37 @@ export default function MovieDetail() {
             .then(res => res.json())
             .then(data => setMovie(data))
     }, [id])
-
+ 
     useEffect(() => {
-        fetch("http://localhost:3000/favorites")
+        fetch("http://localhost:3000/favorites", {
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+        })
             .then(res => res.json())
             .then(data => {
-                setIsFavourite(data.some(f => f.movieId === parseInt(id)))
+                if (Array.isArray(data)) {
+                    setIsFavourite(data.some(f => f.movieId === parseInt(id)))
+                }
             })
     }, [id])
 
     const toggleFavourite = async () => {
         if (isFavourite) {
-            const favs = await fetch("http://localhost:3000/favorites").then(r => r.json())
+            const favs = await fetch("http://localhost:3000/favorites", {
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+            }).then(r => r.json())
             const fav = favs.find(f => f.movieId === parseInt(id))
-            await fetch(`http://localhost:3000/favorites/${fav.id}`, { method: "DELETE" })
+            await fetch(`http://localhost:3000/favorites/${fav.id}`, {
+                method: "DELETE",
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+            })
             setIsFavourite(false)
         } else {
             await fetch("http://localhost:3000/favorites", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                },
                 body: JSON.stringify({ movieId: parseInt(id) })
             })
             setIsFavourite(true)
@@ -52,7 +64,7 @@ export default function MovieDetail() {
         }}
         >
             <header className={styles.header}>
-                <Link to="/" className={styles.logoLink}>
+                <Link to="/home" className={styles.logoLink}>
                     <span>Movie Explorer <img src="/src/assets/icons/film-roll.png"/></span>
                 </Link>
             </header>

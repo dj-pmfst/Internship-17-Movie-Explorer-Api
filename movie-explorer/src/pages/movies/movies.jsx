@@ -19,11 +19,13 @@ export default function Movies() {
     const [favorites, setFavorites] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:3000/favorites")
+        fetch("http://localhost:3000/favorites", {
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+        })
             .then(res => res.json())
-            .then(data => { 
-                console.log('favorites:', data)
-                if (Array.isArray(data)) setFavorites(data) 
+            .then(data => {
+                console.log("favourites data:", data)
+                if (Array.isArray(data)) setFavorites(data)
             })
     }, [])
 
@@ -55,7 +57,7 @@ export default function Movies() {
     return (
         <div className={styles.container}>
             <header className={styles.header}>
-                <Link to="/" className={styles.logoLink}>
+                <Link to="/home" className={styles.logoLink}>
                     <span>Movie Explorer <img src="/src/assets/icons/film-roll.png"/></span>
                 </Link>
                 <Link to="/favourites" className={styles.favLink}>
