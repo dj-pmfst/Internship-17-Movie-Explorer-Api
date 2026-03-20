@@ -59,11 +59,16 @@ export default function Movies() {
             <header className={styles.header}>
                 <Link to="/home" className={styles.logoLink}>
                     <span>Movie Explorer <img src="/src/assets/icons/film-roll.png"/></span>
-                </Link>
-                <Link to="/favourites" className={styles.favLink}>
-                    <img className={styles.star} src="/src/assets/icons/star.png" /> 
-                    Favourites
-                </Link>
+                </Link>                
+                <div className={styles.headerRight}>
+                    <Link to="/favourites" className={styles.favLink}>
+                        <img className={styles.star} src="/src/assets/icons/star.png" /> 
+                        Favourites
+                    </Link>
+                    <Link to="/manager" className={styles.favLink}>
+                        Manager
+                    </Link>
+                </div>
             </header>
 
             <main className={styles.main}>
