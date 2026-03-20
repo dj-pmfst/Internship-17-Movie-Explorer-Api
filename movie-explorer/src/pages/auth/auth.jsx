@@ -44,11 +44,13 @@ export default function Auth() {
                 body: JSON.stringify({ email, password })
             })
             const data = await res.json()
+            console.log("status:", res.status)
+            console.log("data:", data)
             if (!res.ok) throw new Error(data.message || `${tab === "login" ? "Login" : "Registration"} failed`)
 
             if (tab === "login") {
                 localStorage.setItem("token", data.token)
-                navigate("/")
+                navigate("/home")
             } else {
                 setSuccess("Account created")
                 switchTab("login")
