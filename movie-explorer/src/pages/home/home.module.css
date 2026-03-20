@@ -105,3 +105,18 @@ body{
     border-radius: 10px;
     font-family: "Pacifico", cursive;
 }
+
+@media (max-width: 600px) {
+    .title { 
+        font-size: 3rem; 
+    }
+    .header { 
+        padding: 1rem; 
+    }
+    .searchBar { 
+        width: 100%; 
+    }
+    .ribbonPoster { 
+        height: 140px; width: 90px; 
+    }
+}

@@ -91,3 +91,37 @@
     background-color: goldenrod;
     color: rgb(94, 94, 94);
 }
+
+@media (max-width: 600px) {
+    .header { 
+        padding: 1rem; 
+    }
+
+    .main { 
+        padding: 1rem; 
+    }
+ 
+    .content {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+ 
+    .poster {
+        width: 180px;
+        height: 265px;
+    }
+ 
+    .info {
+        width: 100%;
+    }
+ 
+    .description {
+        max-width: 100%;
+    }
+ 
+    .favButton {
+        width: 100%;
+        text-align: center;
+    }
+}

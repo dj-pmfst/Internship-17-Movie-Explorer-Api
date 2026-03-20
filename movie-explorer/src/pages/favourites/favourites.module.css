@@ -100,3 +100,17 @@ p {
 .backButton:hover {
     transform: translateY(-5px) scale(1.02);
 }
+
+@media (max-width: 600px) {
+    .header { 
+        padding: 1rem; 
+        font-size: 16px; 
+    }
+    .main { 
+        padding: 0 1rem 1rem; 
+    }
+    .grid { 
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+        padding: 0.5rem; 
+    }
+}

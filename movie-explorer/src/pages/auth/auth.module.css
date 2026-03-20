@@ -165,3 +165,16 @@
     flex-direction: row;
     align-items: center
 }
+
+@media (max-width: 600px) {
+    .card { 
+        padding: 1.5rem 1rem; 
+    }
+    .title { 
+        font-size: 1.6rem; 
+    }
+    .container h1 { 
+        font-size: 2rem; 
+        padding: 0.5rem; 
+    }
+}

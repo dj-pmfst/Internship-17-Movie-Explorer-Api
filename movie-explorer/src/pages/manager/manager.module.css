@@ -312,3 +312,29 @@
     border-color: #ff8a8a;
     color: #ff8a8a;
 }
+
+@media (max-width: 600px) {
+    .header { 
+        padding: 1rem; 
+        font-size: 16px; 
+    }
+    .main { 
+        padding: 0 1rem 1rem; 
+    }
+    .formSection, .listSection { 
+        padding: 1.25rem; 
+    }
+    .formGrid { 
+        grid-template-columns: 1fr; 
+    }
+    .fullWidth { 
+        grid-column: 1; 
+    }
+    .movieRow { 
+        flex-wrap: wrap; 
+    }
+    .movieActions { 
+        width: 100%; 
+        justify-content: flex-end; 
+    }
+}

@@ -128,3 +128,27 @@ p {
     align-items: center;
     gap: 0.5rem;
 }
+
+@media (max-width: 600px) {
+    .header { 
+        padding: 1rem; 
+        font-size: 16px; 
+    }
+    .main {
+         padding-right: 1rem; 
+    }
+    .searches { 
+        padding-left: 1rem; 
+        flex-direction: column; 
+    }
+    .searches input, .searches select { 
+        width: 100%; 
+        box-sizing: border-box; 
+    }
+    .grid { 
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+    }
+    .movies { 
+        height: calc(100vh - 250px); 
+    }
+}
