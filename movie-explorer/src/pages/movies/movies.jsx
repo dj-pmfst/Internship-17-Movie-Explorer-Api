@@ -88,7 +88,11 @@ export default function Movies() {
                         {genres.map(g => (
                             <option key={g.id} value={g.name}>{g.name}</option>
                         ))}
-                    </select>                
+                    </select>  
+                       
+                    <Link to="/" className={styles.logoutBtn}>
+                        Log out
+                    </Link>           
                 </div>
                 
                 <div className={styles.movies}>

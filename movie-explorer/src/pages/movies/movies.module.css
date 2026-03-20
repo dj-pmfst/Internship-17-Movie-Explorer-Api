@@ -118,3 +118,7 @@ p {
     border-radius: 10px;
     font-family: "Pacifico", cursive;
 }
+
+.logoutBtn {
+    margin-left: auto;
+}
